@@ -12,7 +12,7 @@ export function ProjectCard({ project }: { project: Project }) {
     target: ref,
     offset: ["start end", "end start"],
   });
-  const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
+  const y = useTransform(scrollYProgress, [0, 1], reduced ? ["0%", "0%"] : ["-6%", "6%"]);
 
   return (
     <div ref={ref} className="group border-t border-border">
@@ -50,7 +50,7 @@ export function ProjectCard({ project }: { project: Project }) {
               loading="lazy"
               width={1280}
               height={960}
-              style={reduced ? undefined : { y }}
+              style={{ y }}
               className="aspect-[16/10] w-full scale-105 object-cover transition-[transform,filter] duration-[900ms] ease-out group-hover:scale-110 group-hover:brightness-110"
             />
             <div
