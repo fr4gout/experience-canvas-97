@@ -33,7 +33,7 @@ export function CustomCursor() {
       const target = event.target as HTMLElement | null;
       const marked = target?.closest?.("[data-cursor]") as HTMLElement | null;
       if (marked) {
-        setState((marked.dataset.cursor as CursorState) ?? "hover");
+        setState((marked.dataset["cursor"] as CursorState) ?? "hover");
         return;
       }
       const interactive = target?.closest?.(

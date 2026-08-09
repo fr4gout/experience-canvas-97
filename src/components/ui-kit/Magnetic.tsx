@@ -38,7 +38,7 @@ export function Magnetic({ children, className, strength = 0.28 }: MagneticProps
       ref={ref}
       onMouseMove={onMove}
       onMouseLeave={reset}
-      style={active ? { x: springX, y: springY } : undefined}
+      style={{ x: springX, y: springY }}
       className={cn("inline-block", className)}
     >
       {children}

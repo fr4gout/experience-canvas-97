@@ -7,33 +7,26 @@ interface RevealProps {
   delay?: number;
   y?: number;
   className?: string;
-  as?: "div" | "span" | "li";
 }
 
 /** Scroll-triggered reveal that collapses to a no-op under reduced motion. */
-export function Reveal({
-  children,
-  delay = 0,
-  y = 28,
-  className,
-  as = "div",
-}: RevealProps) {
+export function Reveal({ children, delay = 0, y = 28, className }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-12% 0px -8% 0px" });
   const reduced = usePrefersReducedMotion();
-  const Component = motion[as];
+
+  const hidden = { opacity: 0, y };
+  const shown = { opacity: 1, y: 0 };
 
   return (
-    <Component
+    <motion.div
       ref={ref}
-      className={className}
-      initial={reduced ? undefined : { opacity: 0, y }}
-      animate={
-        reduced ? undefined : inView ? { opacity: 1, y: 0 } : { opacity: 0, y }
-      }
+      className={className ?? ""}
+      initial={reduced ? shown : hidden}
+      animate={reduced || inView ? shown : hidden}
       transition={{ duration: 0.9, delay, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
-    </Component>
+    </motion.div>
   );
 }
