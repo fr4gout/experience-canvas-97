@@ -1,6 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { getProject, projects } from "@/data/projects";
+import type { Project } from "@/types";
 import { CustomCursor } from "@/components/cursor/CustomCursor";
 import { SiteNav } from "@/components/navigation/SiteNav";
 import { SiteFooter } from "@/sections/SiteFooter";
@@ -40,7 +41,7 @@ export const Route = createFileRoute("/work/$slug")({
 });
 
 function CaseStudy() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
   const next =
     projects[(projects.findIndex((p) => p.slug === project.slug) + 1) % projects.length]!;
 
